@@ -1,0 +1,62 @@
+/* --- VARIÁVEIS DO SISTEMA --- */
+:root {
+    --primary: #2563eb;
+    --secondary: #0f172a;
+    --bg-color: #ffffff;
+    --text-color: #1e293b;
+    --radius: 12px;
+    --spacing: 1rem;
+    --transition: all 0.3s ease;
+}
+
+/* --- MODO ALTO CONTRASTE --- */
+body.high-contrast {
+    --primary: #ffff00;
+    --secondary: #000000;
+    --bg-color: #000000;
+    --text-color: #ffffff;
+}
+
+/* --- RESET & BASE --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+    font-family: sans-serif; 
+    line-height: 1.6; 
+    background-color: var(--bg-color); 
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+/* --- LAYOUT GRID (MOBILE-FIRST) --- */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 coluna no mobile */
+    gap: 20px;
+    padding: var(--spacing);
+}
+
+/* --- MEDIA QUERIES (DESKTOP) --- */
+@media (min-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 colunas no desktop */
+    }
+}
+
+/* --- ANIMAÇÕES (SCROLL REVEAL CLASS) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estilização básica dos cards */
+.card {
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    padding: var(--spacing);
+}
