@@ -1,143 +1,101 @@
-/* =========================================
-   SISTEMA DE DESIGN & VARIÁVEIS
-   ========================================= */
+
+/* --- CONFIGURAÇÕES GLOBAIS E VARIÁVEIS --- */
 :root {
-    --primary: #2563eb;
-    --secondary: #0f172a;
-    --bg-body: #f8fafc;
-    --text-main: #334155;
-    --white: #ffffff;
+    /* Cores */
+    --primary: #2a9d8f;
+    --secondary: #264653;
+    --accent: #e9c46a;
+    --text: #333333;
+    --bg: #f4f4f9;
+    
+    /* Design Tokens */
     --radius: 12px;
-    --gap: 1.5rem;
-    --transition: 0.3s ease-in-out;
-    font-size: 16px; /* Base para o controle de fonte */
+    --spacing: 1.5rem;
+    --transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* MODO ALTO CONTRASTE */
+/* --- MODO ALTO CONTRASTE --- */
 body.high-contrast {
+    --bg: #000;
+    --text: #fff;
     --primary: #ffff00;
-    --secondary: #000000;
-    --bg-body: #000000;
-    --text-main: #ffffff;
-    --white: #000000;
-    border: 2px solid #ffff00;
+    --secondary: #fff;
+    --accent: #ffff00;
 }
 
-/* =========================================
-   LAYOUT BASE
-   ========================================= */
+/* --- RESET E TIPOGRAFIA --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-    margin: 0;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background-color: var(--bg-body);
-    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
     line-height: 1.6;
-    transition: background 0.3s, color 0.3s;
+    transition: background 0.3s, font-size 0.2s;
 }
 
+/* --- LAYOUT (MOBILE-FIRST) --- */
 header {
-    background: var(--secondary);
-    color: white;
-    padding: 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav {
+    padding: var(--spacing);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.a11y-controls button {
-    cursor: pointer;
-    background: var(--primary);
+    background: var(--secondary);
     color: white;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-left: 5px;
 }
 
-/* =========================================
-   GRID & RESPONSIVIDADE
-   Mude as colunas aqui para Desktop
-   ========================================= */
+/* Grid de Destinos: Altere o 'columns' aqui para mudar o layout */
 .container-grid {
     display: grid;
-    gap: var(--gap);
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    /* Mobile: 1 coluna por padrão */
-    grid-template-columns: 1fr;
+    gap: var(--spacing);
+    padding: var(--spacing);
+    grid-template-columns: 1fr; /* Mobile: 1 coluna */
 }
 
 @media (min-width: 768px) {
     .container-grid {
-        /* Tablet/Desktop: Altere aqui o número de colunas */
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* Desktop: 3 colunas */
     }
 }
 
-/* =========================================
-   COMPONENTES
-   ========================================= */
+/* --- COMPONENTES --- */
 .card {
-    background: var(--white);
+    background: white;
+    padding: var(--spacing);
     border-radius: var(--radius);
-    padding: 1rem;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-    opacity: 0; transform: translateY(20px); /* Para Scroll Reveal */
-    transition: 0.5s all;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: var(--transition);
 }
 
-.card.visible {
-    opacity: 1; transform: translateY(0);
+body.high-contrast .card {
+    border: 2px solid #fff;
+    background: #000;
 }
 
 .accordion-item {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--primary);
+    margin-bottom: 10px;
 }
 
 .accordion-header {
     width: 100%;
-    text-align: left;
     padding: 1rem;
+    text-align: left;
     background: none;
     border: none;
+    color: var(--text);
     font-weight: bold;
     cursor: pointer;
 }
 
-.accordion-content {
-    display: none;
-    padding: 1rem;
-    background: #f1f5f9;
+/* --- ANIMAÇÕES (SCROLL REVEAL) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
-.accordion-content.active { display: block; }
-
-/* CARROSSEL SIMPLES */
-.carousel-container {
-    overflow: hidden;
-    position: relative;
-    max-width: 800px;
-    margin: 2rem auto;
-}
-
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-.slide {
-    min-width: 100%;
-    padding: 2rem;
-    text-align: center;
-    box-sizing: border-box;
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
