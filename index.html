@@ -3,42 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExploraMundo - Sua próxima aventura começa aqui</title>
+    <title>ExploreMundo | Viagens Inesquecíveis</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <nav aria-label="Menu Principal">
-            <div class="logo">ExploraMundo</div>
-            <div class="accessibility-controls">
-                <button onclick="changeFontSize('increase')" aria-label="Aumentar fonte">A+</button>
-                <button onclick="changeFontSize('decrease')" aria-label="Diminuir fonte">A-</button>
-                <button onclick="toggleContrast()" aria-label="Alternar Alto Contraste">🌓</button>
+            <div class="logo">Explore<span>Mundo</span></div>
+            <div class="a11y-controls">
+                <button id="btn-contrast" aria-label="Alternar Alto Contraste">🌓</button>
+                <button id="font-up" aria-label="Aumentar Fonte">A+</button>
+                <button id="font-down" aria-label="Diminuir Fonte">A-</button>
             </div>
         </nav>
     </header>
 
     <main>
-        <section id="hero" class="reveal">
-            <h1>Descubra destinos inacreditáveis</h1>
-            <p>Experiências personalizadas para viajantes autênticos.</p>
+        <section class="hero" aria-labelledby="hero-title">
+            <h1 id="hero-title">O destino dos seus sonhos começa aqui.</h1>
+            <p>Experiências autênticas, acessíveis e memoráveis ao redor do globo.</p>
         </section>
 
-        <section id="destinos" aria-labelledby="titulo-destinos" class="reveal">
-            <h2 id="titulo-destinos">Destinos em Destaque</h2>
-            <div id="destinos-grid" class="grid-container">
+        <section id="destinos" aria-labelledby="destinos-title">
+            <h2 id="destinos-title">Destinos Populares</h2>
+            <div id="grid-destinos" class="container-grid">
                 </div>
         </section>
 
-        <section id="faq" class="reveal">
-            <h2>Dúvidas Frequentes</h2>
-            <div id="faq-container">
+        <section class="carousel-section" aria-label="Depoimentos de Clientes">
+            <div class="carousel-container" role="region" aria-live="polite">
+                <div id="carousel-track" class="carousel-track">
+                    </div>
+                <button class="prev" aria-label="Slide anterior">❮</button>
+                <button class="next" aria-label="Próximo slide">❯</button>
+            </div>
+        </section>
+
+        <section id="faq" aria-labelledby="faq-title">
+            <h2 id="faq-title">Dúvidas Frequentes</h2>
+            <div id="faq-container" class="accordion-group">
                 </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2023 ExploraMundo. Focado em acessibilidade.</p>
+        <p>&copy; 2024 ExploreMundo Viagens. Feito com foco em acessibilidade.</p>
     </footer>
 
     <script src="script.js"></script>
