@@ -1,88 +1,68 @@
 
-/* =========================================
-   GESTÃO DE DADOS (ARRAY DE OBJETOS)
-   ========================================= */
-const modalidades = [
-    { titulo: "Ciclismo", desc: "Aerodinâmica e potência em dois canais." },
-    { titulo: "Natação", desc: "Hidrodinâmica aplicada à performance olímpica." },
-    { titulo: "Corrida", desc: "Biomecânica e amortecimento de última geração." }
+// 1. Simulação de Notícias Dinâmicas
+const newsData = [
+    { title: "Brasil vence amistoso com gol no último minuto!", time: "Há 2 horas" },
+    { title: "Novo recorde mundial na maratona de Boston.", time: "Há 5 horas" },
+    { title: "Transferências: Astro do basquete muda de time.", time: "Há 8 horas" }
 ];
 
-const faqs = [
-    { q: "Como a tecnologia ajuda?", a: "Através de sensores IoT e análise de dados em tempo real." },
-    { q: "Quais equipamentos usar?", a: "Recomendamos tecidos inteligentes e wearables de alta precisão." }
-];
+const newsContainer = document.getElementById('news-container');
 
-/* =========================================
-   RENDERIZAÇÃO DINÂMICA
-   ========================================= */
-function renderContent() {
-    // Renderizar Cards de Modalidades
-    const grid = document.getElementById('gallery-grid');
-    grid.innerHTML = modalidades.map(item => `
-        <article class="card">
-            <h3>${item.titulo}</h3>
-            <p>${item.desc}</p>
-        </article>
-    `).join('');
-
-    // Renderizar Acordeões (FAQ)
-    const accordionGroup = document.getElementById('accordion-group');
-    accordionGroup.innerHTML = faqs.map((item, index) => `
-        <div class="accordion-item">
-            <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false">
-                ${item.q} <span>+</span>
-            </button>
-            <div class="accordion-content">
-                <p>${item.a}</p>
-            </div>
-        </div>
-    `).join('');
+function loadNews() {
+    newsData.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'news-item reveal';
+        div.innerHTML = `
+            <h4>${item.title}</h4>
+            <small>${item.time}</small>
+        `;
+        newsContainer.appendChild(div);
+    });
 }
 
-/* =========================================
-   LOGICA DE ACESSIBILIDADE
-   ========================================= */
-let currentFontSize = 100;
+// 2. Menu Hamburguer
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
 
-function changeFontSize(action) {
-    currentFontSize += (action === 'increase' ? 10 : -10);
-    document.documentElement.style.fontSize = `${currentFontSize}%`;
-}
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
 
-function toggleContrast() {
-    document.body.classList.toggle('high-contrast');
-}
+// 3. Troca de Tema (Dark/Light)
+const themeBtn = document.getElementById('theme-toggle');
+themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌓';
+});
 
-/* =========================================
-   COMPONENTES (ACORDEÃO E REVEAL)
-   ========================================= */
-function toggleAccordion(btn) {
-    const item = btn.parentElement;
-    const isActive = item.classList.contains('active');
-    
-    // Fecha todos antes de abrir o novo (opcional)
-    document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('active'));
-    
-    if (!isActive) {
-        item.classList.add('active');
-        btn.setAttribute('aria-expanded', 'true');
-    } else {
-        btn.setAttribute('aria-expanded', 'false');
-    }
-}
+// 4. Contador de Cliques
+let count = 0;
+const countBtn = document.getElementById('count-btn');
+const counterDisplay = document.getElementById('click-counter');
 
-// Scroll Reveal Observer
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+countBtn.addEventListener('click', () => {
+    count++;
+    counterDisplay.textContent = count;
+    countBtn.style.transform = "scale(0.9)";
+    setTimeout(() => countBtn.style.transform = "scale(1)", 100);
+});
+
+// 5. Animação de Scroll (Reveal)
+function reveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const revealTop = el.getBoundingClientRect().top;
+        const revealPoint = 150;
+
+        if (revealTop < windowHeight - revealPoint) {
+            el.classList.add('active');
         }
     });
-}, { threshold: 0.1 });
+}
 
-// Inicialização
-document.addEventListener('DOMContentLoaded', () => {
-    renderContent();
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-});
+window.addEventListener('scroll', reveal);
+window.onload = () => {
+    loadNews();
+    reveal(); // Inicia os elementos visíveis
+};
