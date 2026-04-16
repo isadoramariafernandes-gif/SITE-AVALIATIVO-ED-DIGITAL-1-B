@@ -1,42 +1,44 @@
 
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RadicalLife - Explore o seu limite</title>
+    <title>Portal Esporte Total - Landing Page</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <nav aria-label="Menu Principal">
-            <div class="logo">Radical<span>Life</span></div>
-            <div class="accessibility-controls">
-                <button id="btn-increase-font" aria-label="Aumentar fonte">A+</button>
-                <button id="btn-decrease-font" aria-label="Diminuir fonte">A-</button>
-                <button id="btn-contrast" aria-label="Alternar Alto Contraste">🌓</button>
+            <div class="logo">EsporteTotal</div>
+            <div class="controls">
+                <button id="btn-contrast" aria-label="Alternar alto contraste">🌓 Contraste</button>
+                <button id="btn-font-up" aria-label="Aumentar fonte">A+</button>
+                <button id="btn-font-down" aria-label="Diminuir fonte">A-</button>
             </div>
         </nav>
     </header>
 
     <main>
         <section id="hero" aria-labelledby="hero-title">
-            <h1 id="hero-title">Domine a Adrenalina</h1>
-            <p>Conheça as modalidades que desafiam a gravidade.</p>
+            <h1 id="hero-title">O Mundo dos Esportes em um só lugar</h1>
+            <p>Descubra modalidades, treinos e performance.</p>
         </section>
 
-        <section id="sports-container" class="grid-container" aria-live="polite">
-            </section>
+        <section id="modalidades" aria-labelledby="mod-title">
+            <h2 id="mod-title">Modalidades em Destaque</h2>
+            <div id="grid-esportes" class="grid-container">
+                </div>
+        </section>
 
         <section id="faq" aria-labelledby="faq-title">
             <h2 id="faq-title">Dúvidas Frequentes</h2>
-            <div id="accordion-group">
-                </div>
+            <div id="accordion-container"></div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 RadicalLife. Desenvolvido para fins educativos.</p>
+        <p>&copy; 2024 Esporte Total - Acessibilidade em primeiro lugar.</p>
     </footer>
 
     <script src="script.js"></script>
