@@ -1,62 +1,87 @@
 
-// --- DADOS DO SITE (SISTEMA DE GESTÃO) ---
-const destinos = [
-    {
-        titulo: "Bora Bora",
-        img: "https://images.unsplash.com/photo-1500932334442-8761ee4810a7?auto=format&fit=crop&w=500&q=60",
-        desc: "Bangalôs sobre águas turquesas e corais vivos."
-    },
-    {
-        titulo: "Grécia (Santorini)",
-        img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=500&q=60",
-        desc: "O contraste perfeito entre o branco das vilas e o azul do mar."
-    },
-    {
-        titulo: "Fernando de Noronha",
-        img: "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=500&q=60",
-        desc: "O santuário ecológico mais preservado do Brasil."
-    }
+// 1. GESTÃO DE DADOS (Simulando um Banco de Dados)
+const sportsData = [
+    { title: "Skate", desc: "Manobras urbanas e liberdade total." },
+    { title: "Surf", desc: "A conexão perfeita entre o homem e o mar." },
+    { title: "Escalada", desc: "Desafiando limites em paredes verticais." }
 ];
 
-// --- RENDERIZADOR DE CARDS ---
-function renderCards() {
-    const container = document.getElementById('gallery-container');
-    container.innerHTML = destinos.map(d => `
-        <article class="card">
-            <img src="${d.img}" alt="Paisagem de ${d.titulo}" class="card-img">
-            <div class="card-info">
-                <h3>${d.titulo}</h3>
-                <p>${d.desc}</p>
-            </div>
+const faqData = [
+    { q: "Quais equipamentos são necessários?", a: "Depende da modalidade, mas segurança sempre vem em primeiro lugar." },
+    { q: "Onde praticar?", a: "Existem parques e picos específicos em todo o Brasil." }
+];
+
+// 2. FUNÇÕES DE RENDERIZAÇÃO
+function initApp() {
+    renderSports();
+    renderFAQ();
+    setupAccessibility();
+    setupScrollReveal();
+}
+
+function renderSports() {
+    const container = document.getElementById('sports-container');
+    container.innerHTML = sportsData.map(sport => `
+        <article class="sport-card">
+            <h3>${sport.title}</h3>
+            <p>${sport.desc}</p>
+            <button class="btn-more">Saiba mais</button>
         </article>
     `).join('');
 }
 
-// --- ACESSIBILIDADE ---
-let zoom = 100;
-function changeFontSize(type) {
-    zoom = type === 'inc' ? zoom + 10 : zoom - 10;
-    document.body.style.fontSize = zoom + "%";
+function renderFAQ() {
+    const container = document.getElementById('accordion-group');
+    container.innerHTML = faqData.map((item, index) => `
+        <div class="accordion-item">
+            <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+                ${item.q}
+            </button>
+            <div class="accordion-content" style="display:none; padding: 1rem;">
+                <p>${item.a}</p>
+            </div>
+        </div>
+    `).join('');
 }
 
-function toggleContrast() {
-    document.body.classList.toggle('high-contrast');
-}
+// 3. ACESSIBILIDADE E COMPONENTES
+let fontSize = 16;
 
-// --- LÓGICA DE REVEAL (SCROLL) ---
-function revealEffect() {
-    const sections = document.querySelectorAll('.reveal');
-    sections.forEach(s => {
-        const top = s.getBoundingClientRect().top;
-        if (top < window.innerHeight - 100) {
-            s.classList.add('active');
-        }
+function setupAccessibility() {
+    document.getElementById('btn-increase-font').addEventListener('click', () => {
+        fontSize += 2;
+        document.body.style.fontSize = fontSize + 'px';
+    });
+
+    document.getElementById('btn-decrease-font').addEventListener('click', () => {
+        fontSize -= 2;
+        document.body.style.fontSize = fontSize + 'px';
+    });
+
+    document.getElementById('btn-contrast').addEventListener('click', () => {
+        document.body.classList.toggle('high-contrast');
     });
 }
 
-// --- INICIALIZAÇÃO ---
-window.addEventListener('scroll', revealEffect);
-window.onload = () => {
-    renderCards();
-    revealEffect();
-};
+function toggleAccordion(btn) {
+    const content = btn.nextElementSibling;
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    
+    btn.setAttribute('aria-expanded', !isExpanded);
+    content.style.display = isExpanded ? 'none' : 'block';
+}
+
+// 4. LOGICA DE SCROLL REVEAL (Simples)
+function setupScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.sport-card').forEach(card => observer.observe(card));
+}
+
+window.onload = initApp;
