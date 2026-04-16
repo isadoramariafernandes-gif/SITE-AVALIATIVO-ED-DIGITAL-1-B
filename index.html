@@ -1,44 +1,70 @@
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Esporte Total - Landing Page</title>
+    <title>SportX - Performance ao Limite</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav aria-label="Menu Principal">
-            <div class="logo">EsporteTotal</div>
-            <div class="controls">
-                <button id="btn-contrast" aria-label="Alternar alto contraste">🌓 Contraste</button>
-                <button id="btn-font-up" aria-label="Aumentar fonte">A+</button>
-                <button id="btn-font-down" aria-label="Diminuir fonte">A-</button>
-            </div>
-        </nav>
+    <nav class="accessibility-bar" aria-label="Controles de acessibilidade">
+        <button onclick="changeFontSize('increase')" aria-label="Aumentar fonte">A+</button>
+        <button onclick="changeFontSize('decrease')" aria-label="Diminuir fonte">A-</button>
+        <button onclick="toggleContrast()" aria-label="Alternar alto contraste">🌓</button>
+    </nav>
+
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">Sport<span>X</span></div>
+            <nav aria-label="Navegação principal">
+                <ul class="nav-links">
+                    <li><a href="#modalidades">Modalidades</a></li>
+                    <li><a href="#tecnologia">Tecnologia</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <section id="hero" aria-labelledby="hero-title">
-            <h1 id="hero-title">O Mundo dos Esportes em um só lugar</h1>
-            <p>Descubra modalidades, treinos e performance.</p>
+        <section class="hero reveal">
+            <div class="container">
+                <h1>Supere seus <span>Limites</span></h1>
+                <p>A tecnologia a serviço da performance esportiva de elite.</p>
+            </div>
         </section>
 
-        <section id="modalidades" aria-labelledby="mod-title">
-            <h2 id="mod-title">Modalidades em Destaque</h2>
-            <div id="grid-esportes" class="grid-container">
+        <section id="modalidades" class="section container reveal">
+            <h2 class="section-title">Modalidades em Foco</h2>
+            <div id="gallery-grid" class="grid-layout">
                 </div>
         </section>
 
-        <section id="faq" aria-labelledby="faq-title">
-            <h2 id="faq-title">Dúvidas Frequentes</h2>
-            <div id="accordion-container"></div>
+        <section class="carousel-section section reveal">
+            <div class="container">
+                <div class="carousel" id="main-carousel" role="region" aria-label="Carrossel de destaques">
+                    <div class="carousel-track" id="carousel-track">
+                        </div>
+                    <div class="carousel-controls">
+                        <button id="prevBtn" aria-label="Anterior">❮</button>
+                        <button id="nextBtn" aria-label="Próximo">❯</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section container reveal">
+            <h2 class="section-title">Dúvidas Frequentes</h2>
+            <div id="accordion-group" class="accordion-container">
+                </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Esporte Total - Acessibilidade em primeiro lugar.</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 SportX. Desenvolvido com foco em acessibilidade digital.</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
