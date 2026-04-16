@@ -1,69 +1,62 @@
 
-// --- GESTÃO DE DADOS ---
-const destinosData = [
-    { nome: "Ilhas Maldivas", desc: "Paraísos de águas cristalinas.", preco: "R$ 12.000" },
-    { nome: "Patagônia", desc: "Aventuras geladas e paisagens épicas.", preco: "R$ 8.500" },
-    { nome: "Tóquio", desc: "Onde o futuro encontra a tradição.", preco: "R$ 15.000" }
+// --- DADOS DO SITE (SISTEMA DE GESTÃO) ---
+const destinos = [
+    {
+        titulo: "Bora Bora",
+        img: "https://images.unsplash.com/photo-1500932334442-8761ee4810a7?auto=format&fit=crop&w=500&q=60",
+        desc: "Bangalôs sobre águas turquesas e corais vivos."
+    },
+    {
+        titulo: "Grécia (Santorini)",
+        img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=500&q=60",
+        desc: "O contraste perfeito entre o branco das vilas e o azul do mar."
+    },
+    {
+        titulo: "Fernando de Noronha",
+        img: "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=500&q=60",
+        desc: "O santuário ecológico mais preservado do Brasil."
+    }
 ];
 
-const faqData = [
-    { q: "Preciso de visto?", a: "Depende do destino. Verifique a aba de suporte." },
-    { q: "Quais as formas de pagamento?", a: "Aceitamos Pix, Cartão em 12x e Cripto." }
-];
-
-// --- RENDERIZAÇÃO DINÂMICA ---
-function renderContent() {
-    const grid = document.getElementById('grid-destinos');
-    grid.innerHTML = destinosData.map(item => `
+// --- RENDERIZADOR DE CARDS ---
+function renderCards() {
+    const container = document.getElementById('gallery-container');
+    container.innerHTML = destinos.map(d => `
         <article class="card">
-            <h3>${item.nome}</h3>
-            <p>${item.desc}</p>
-            <strong>${item.preco}</strong>
-        </article>
-    `).join('');
-
-    const faqContainer = document.getElementById('faq-container');
-    faqContainer.innerHTML = faqData.map((item, index) => `
-        <div class="accordion-item">
-            <button class="accordion-header" onclick="toggleAccordion(${index})" aria-expanded="false">
-                ${item.q}
-            </button>
-            <div class="accordion-content" style="display:none; padding: 1rem;">
-                <p>${item.a}</p>
+            <img src="${d.img}" alt="Paisagem de ${d.titulo}" class="card-img">
+            <div class="card-info">
+                <h3>${d.titulo}</h3>
+                <p>${d.desc}</p>
             </div>
-        </div>
+        </article>
     `).join('');
 }
 
 // --- ACESSIBILIDADE ---
-let fontSize = 100;
-function adjustFont(type) {
-    fontSize = type === 'increase' ? fontSize + 10 : fontSize - 10;
-    document.body.style.fontSize = fontSize + "%";
+let zoom = 100;
+function changeFontSize(type) {
+    zoom = type === 'inc' ? zoom + 10 : zoom - 10;
+    document.body.style.fontSize = zoom + "%";
 }
 
 function toggleContrast() {
     document.body.classList.toggle('high-contrast');
 }
 
-// --- COMPONENTES (ACORDEÃO) ---
-function toggleAccordion(index) {
-    const contents = document.querySelectorAll('.accordion-content');
-    const display = contents[index].style.display;
-    contents[index].style.display = display === 'block' ? 'none' : 'block';
-}
-
-// --- ANIMAÇÃO SCROLL REVEAL ---
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+// --- LÓGICA DE REVEAL (SCROLL) ---
+function revealEffect() {
+    const sections = document.querySelectorAll('.reveal');
+    sections.forEach(s => {
+        const top = s.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+            s.classList.add('active');
         }
     });
-}, { threshold: 0.1 });
+}
 
 // --- INICIALIZAÇÃO ---
+window.addEventListener('scroll', revealEffect);
 window.onload = () => {
-    renderContent();
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    renderCards();
+    revealEffect();
 };
