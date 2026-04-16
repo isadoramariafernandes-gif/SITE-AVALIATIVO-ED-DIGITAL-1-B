@@ -1,66 +1,130 @@
 
-/* 1. VARIÁVEIS DE DESIGN (Fácil Edição) */
+/* =========================================
+   VARIÁVEIS E DESIGN SYSTEM
+   ========================================= */
 :root {
-    --primary-color: #004a99;
-    --secondary-color: #ffcc00;
-    --bg-color: #f4f4f4;
-    --text-color: #333;
-    --radius: 8px;
-    --spacing: 1rem;
-    --base-font-size: 100%; /* Para controle de escala no JS */
+    --primary: #00f2ff;
+    --primary-dark: #006b71;
+    --bg-dark: #0f172a;
+    --surface: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    --radius-lg: 16px;
+    --radius-sm: 8px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --container-w: 1100px;
 }
 
-/* 2. ALTO CONTRASTE (UX/Acessibilidade) */
-body.high-contrast {
-    --primary-color: #ffff00;
-    --bg-color: #000;
-    --text-color: #fff;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
+/* =========================================
+   ESTILOS GLOBAIS E ACESSIBILIDADE
+   ========================================= */
 body {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
     line-height: 1.6;
-    transition: background 0.3s, color 0.3s;
-    font-size: var(--base-font-size);
+    transition: var(--transition);
 }
 
-/* 3. LAYOUT (Mobile-First) */
-header nav {
+.high-contrast {
+    --bg-dark: #000;
+    --surface: #000;
+    --primary: #ffff00;
+    --text-main: #fff;
+    --text-muted: #fff;
+    border: 2px solid #fff;
+}
+
+.accessibility-bar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 5px;
+}
+
+.accessibility-bar button {
+    background: var(--surface);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+}
+
+/* =========================================
+   LAYOUT (GRID & FLEX)
+   ========================================= */
+.container {
+    max-width: var(--container-w);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.grid-layout {
+    display: grid;
+    /* EDITAR AQUI: Colunas dinâmicas (Mobile: 1, Desktop: 3) */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.section { padding: 80px 0; }
+
+/* =========================================
+   COMPONENTES
+   ========================================= */
+.card {
+    background: var(--surface);
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    border-bottom: 4px solid var(--primary);
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 20px;
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
-    padding: var(--spacing);
-    background: var(--primary-color);
-    color: white;
 }
 
-.grid-container {
-    display: grid;
-    gap: var(--spacing);
-    padding: var(--spacing);
-    /* Edite aqui o grid: */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 20px;
 }
 
-/* 4. ANIMAÇÕES (Scroll Reveal) */
+.accordion-item.active .accordion-content {
+    max-height: 200px;
+    padding: 20px;
+}
+
+/* =========================================
+   REVEAL ANIMATION
+   ========================================= */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.6s ease-out;
+    transition: 0.8s ease-out;
 }
 
-.reveal.active {
+.reveal.visible {
     opacity: 1;
     transform: translateY(0);
-}
-
-/* Estilo do Card */
-.card {
-    background: white;
-    padding: var(--spacing);
-    border-radius: var(--radius);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
