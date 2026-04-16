@@ -1,69 +1,95 @@
-
+ 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportX - Performance ao Limite</title>
+    <title>Mundo Esportivo | Energia em Movimento</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
-<body>
-    <nav class="accessibility-bar" aria-label="Controles de acessibilidade">
-        <button onclick="changeFontSize('increase')" aria-label="Aumentar fonte">A+</button>
-        <button onclick="changeFontSize('decrease')" aria-label="Diminuir fonte">A-</button>
-        <button onclick="toggleContrast()" aria-label="Alternar alto contraste">🌓</button>
-    </nav>
+<body class="light-mode">
 
-    <header class="header">
-        <div class="container header-inner">
-            <div class="logo">Sport<span>X</span></div>
-            <nav aria-label="Navegação principal">
-                <ul class="nav-links">
-                    <li><a href="#modalidades">Modalidades</a></li>
-                    <li><a href="#tecnologia">Tecnologia</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+    <header id="header">
+        <div class="container nav-container">
+            <div class="logo">MUNDO<span>ESPORTIVO</span></div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#sports">Esportes</a></li>
+                    <li><a href="#news">Notícias</a></li>
+                    <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
+            <div class="actions">
+                <button id="theme-toggle">🌓</button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main>
-        <section class="hero reveal">
-            <div class="container">
-                <h1>Supere seus <span>Limites</span></h1>
-                <p>A tecnologia a serviço da performance esportiva de elite.</p>
-            </div>
-        </section>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="reveal">SINTA A ADRENALINA</h1>
+            <p class="reveal">Acompanhe os maiores eventos e viva a paixão pelo esporte todos os dias.</p>
+            <a href="#sports" class="btn reveal">Saiba Mais</a>
+        </div>
+    </section>
 
-        <section id="modalidades" class="section container reveal">
-            <h2 class="section-title">Modalidades em Foco</h2>
-            <div id="gallery-grid" class="grid-layout">
-                </div>
-        </section>
-
-        <section class="carousel-section section reveal">
-            <div class="container">
-                <div class="carousel" id="main-carousel" role="region" aria-label="Carrossel de destaques">
-                    <div class="carousel-track" id="carousel-track">
-                        </div>
-                    <div class="carousel-controls">
-                        <button id="prevBtn" aria-label="Anterior">❮</button>
-                        <button id="nextBtn" aria-label="Próximo">❯</button>
-                    </div>
+    <section id="sports" class="container section">
+        <h2 class="section-title">Esportes em Destaque</h2>
+        <div class="sports-grid">
+            <div class="sport-card reveal">
+                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=400&q=80" alt="Futebol">
+                <div class="card-info">
+                    <h3>Futebol</h3>
+                    <p>A paixão nacional com cobertura completa dos campeonatos.</p>
                 </div>
             </div>
-        </section>
-
-        <section id="faq" class="section container reveal">
-            <h2 class="section-title">Dúvidas Frequentes</h2>
-            <div id="accordion-group" class="accordion-container">
+            <div class="sport-card reveal">
+                <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=400&q=80" alt="Basquete">
+                <div class="card-info">
+                    <h3>Basquete</h3>
+                    <p>Enterradas épicas e as melhores jogadas da liga.</p>
                 </div>
-        </section>
-    </main>
+            </div>
+            <div class="sport-card reveal">
+                <img src="https://images.unsplash.com/photo-1592656670411-2918837bc754?auto=format&fit=crop&w=400&q=80" alt="Vôlei">
+                <div class="card-info">
+                    <h3>Vôlei</h3>
+                    <p>A força do trabalho em equipe e ataques potentes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer class="footer">
+    <section id="news" class="news-section">
         <div class="container">
-            <p>&copy; 2024 SportX. Desenvolvido com foco em acessibilidade digital.</p>
+            <h2 class="section-title">Últimas Notícias</h2>
+            <div id="news-container" class="news-list">
+                </div>
+        </div>
+    </section>
+
+    <section class="counter-section container">
+        <h3>Interaja com a Comunidade</h3>
+        <p>Torcedores que já vibraram hoje:</p>
+        <div id="click-counter" class="counter">0</div>
+        <button id="count-btn" class="btn">VIBRAR! 📣</button>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2024 Mundo Esportivo. Todos os direitos reservados.</p>
+            <div class="socials">
+                <span>Instagram</span>
+                <span>Twitter</span>
+                <span>YouTube</span>
+            </div>
         </div>
     </footer>
 
