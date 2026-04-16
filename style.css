@@ -1,101 +1,94 @@
 
-/* --- CONFIGURAÇÕES GLOBAIS E VARIÁVEIS --- */
+/* --- DESIGN SYSTEM --- */
 :root {
-    /* Cores */
-    --primary: #2a9d8f;
-    --secondary: #264653;
-    --accent: #e9c46a;
-    --text: #333333;
-    --bg: #f4f4f9;
+    /* Cores Marítimas */
+    --deep-blue: #003049;
+    --ocean-blue: #0077b6;
+    --sand: #fdf0d5;
+    --sea-foam: #90e0ef;
+    --text-dark: #333;
+    --white: #ffffff;
     
-    /* Design Tokens */
-    --radius: 12px;
-    --spacing: 1.5rem;
-    --transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --radius: 20px;
+    --shadow: 0 10px 30px rgba(0,0,0,0.1);
+    --transition: 0.5s ease-in-out;
 }
 
-/* --- MODO ALTO CONTRASTE --- */
+/* --- ALTO CONTRASTE --- */
 body.high-contrast {
-    --bg: #000;
-    --text: #fff;
-    --primary: #ffff00;
-    --secondary: #fff;
-    --accent: #ffff00;
+    --deep-blue: #ffff00;
+    --ocean-blue: #ffffff;
+    --sand: #000000;
+    --sea-foam: #ffff00;
+    --text-dark: #ffffff;
+    --white: #000000;
 }
 
-/* --- RESET E TIPOGRAFIA --- */
+/* --- ESTILOS GERAIS --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    transition: background 0.3s, font-size 0.2s;
-}
-
-/* --- LAYOUT (MOBILE-FIRST) --- */
-header {
-    padding: var(--spacing);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--secondary);
-    color: white;
-}
-
-/* Grid de Destinos: Altere o 'columns' aqui para mudar o layout */
-.container-grid {
-    display: grid;
-    gap: var(--spacing);
-    padding: var(--spacing);
-    grid-template-columns: 1fr; /* Mobile: 1 coluna */
-}
-
-@media (min-width: 768px) {
-    .container-grid {
-        grid-template-columns: repeat(3, 1fr); /* Desktop: 3 colunas */
-    }
-}
-
-/* --- COMPONENTES --- */
-.card {
-    background: white;
-    padding: var(--spacing);
-    border-radius: var(--radius);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--sand);
+    color: var(--text-dark);
     transition: var(--transition);
 }
 
-body.high-contrast .card {
-    border: 2px solid #fff;
-    background: #000;
+/* --- HERO SECTION COM IMAGEM --- */
+.hero {
+    height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
 }
 
-.accordion-item {
-    border-bottom: 1px solid var(--primary);
-    margin-bottom: 10px;
+/* --- GRID RESPONSIVO (MOBILE-FIRST) --- */
+.grid-layout {
+    display: grid;
+    gap: 2rem;
+    padding: 2rem;
+    grid-template-columns: 1fr; /* 1 coluna no celular */
 }
 
-.accordion-header {
+@media (min-width: 768px) {
+    .grid-layout {
+        grid-template-columns: repeat(3, 1fr); /* 3 colunas no desktop */
+    }
+}
+
+/* --- CARD DE DESTINO --- */
+.card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.card:hover { transform: translateY(-10px); }
+
+.card-img {
     width: 100%;
-    padding: 1rem;
-    text-align: left;
-    background: none;
-    border: none;
-    color: var(--text);
-    font-weight: bold;
-    cursor: pointer;
+    height: 200px;
+    object-fit: cover;
 }
 
-/* --- ANIMAÇÕES (SCROLL REVEAL) --- */
+.card-info { padding: 1.5rem; }
+
+/* --- ANIMAÇÃO DE SCROLL --- */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
+    transform: translateY(50px);
+    transition: all 1s ease;
 }
 
-.reveal.visible {
+.reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
