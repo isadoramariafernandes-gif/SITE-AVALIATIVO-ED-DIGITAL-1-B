@@ -1,48 +1,42 @@
 
-       <!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maré Alta | Viagens Inesquecíveis</title>
+    <title>RadicalLife - Explore o seu limite</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <nav class="navbar" aria-label="Navegação Superior">
-            <div class="logo">Maré<span>Alta</span></div>
-            <div class="accessibility-bar">
-                <button onclick="changeFontSize('inc')" aria-label="Aumentar texto">A+</button>
-                <button onclick="changeFontSize('dec')" aria-label="Diminuir texto">A-</button>
-                <button onclick="toggleContrast()" id="btn-contrast" aria-label="Modo Noturno/Contraste">🌓</button>
+        <nav aria-label="Menu Principal">
+            <div class="logo">Radical<span>Life</span></div>
+            <div class="accessibility-controls">
+                <button id="btn-increase-font" aria-label="Aumentar fonte">A+</button>
+                <button id="btn-decrease-font" aria-label="Diminuir fonte">A-</button>
+                <button id="btn-contrast" aria-label="Alternar Alto Contraste">🌓</button>
             </div>
         </nav>
     </header>
 
     <main>
-        <section class="hero reveal">
-            <div class="hero-content">
-                <h1>Onde as ondas encontram a alma.</h1>
-                <p>Destinos paradisíacos selecionados por especialistas em oceano.</p>
-                <a href="#destinos" class="btn-main">Explorar Destinos</a>
-            </div>
+        <section id="hero" aria-labelledby="hero-title">
+            <h1 id="hero-title">Domine a Adrenalina</h1>
+            <p>Conheça as modalidades que desafiam a gravidade.</p>
         </section>
 
-        <section id="destinos" class="reveal" aria-labelledby="title-destinos">
-            <h2 id="title-destinos" class="section-title">Destinos de Tirar o Fôlego</h2>
-            <div id="gallery-container" class="grid-layout">
-                </div>
-        </section>
+        <section id="sports-container" class="grid-container" aria-live="polite">
+            </section>
 
-        <section class="faq reveal">
-            <h2 class="section-title">Prepare sua Mala</h2>
-            <div id="faq-list">
+        <section id="faq" aria-labelledby="faq-title">
+            <h2 id="faq-title">Dúvidas Frequentes</h2>
+            <div id="accordion-group">
                 </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Maré Alta Viagens. Práticas de UX e Acessibilidade.</p>
+        <p>&copy; 2024 RadicalLife. Desenvolvido para fins educativos.</p>
     </footer>
 
     <script src="script.js"></script>
