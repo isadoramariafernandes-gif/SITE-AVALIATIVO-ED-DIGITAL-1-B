@@ -3,51 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExploreMundo | Viagens Inesquecíveis</title>
+    <title>BioViagens | Explore o Mundo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <nav aria-label="Menu Principal">
-            <div class="logo">Explore<span>Mundo</span></div>
-            <div class="a11y-controls">
-                <button id="btn-contrast" aria-label="Alternar Alto Contraste">🌓</button>
-                <button id="font-up" aria-label="Aumentar Fonte">A+</button>
-                <button id="font-down" aria-label="Diminuir Fonte">A-</button>
+        <nav aria-label="Navegação Principal">
+            <div class="logo">BioViagens</div>
+            <div class="controls">
+                <button onclick="adjustFont('increase')" aria-label="Aumentar fonte">A+</button>
+                <button onclick="adjustFont('decrease')" aria-label="Diminuir fonte">A-</button>
+                <button onclick="toggleContrast()" id="contrast-toggle" aria-label="Alternar alto contraste">🌓</button>
             </div>
         </nav>
     </header>
 
     <main>
-        <section class="hero" aria-labelledby="hero-title">
-            <h1 id="hero-title">O destino dos seus sonhos começa aqui.</h1>
-            <p>Experiências autênticas, acessíveis e memoráveis ao redor do globo.</p>
+        <section class="hero reveal" aria-labelledby="hero-title">
+            <h1 id="hero-title">Destinos que inspiram sua alma</h1>
+            <p>Viagens sustentáveis e roteiros exclusivos pelo mundo.</p>
         </section>
 
-        <section id="destinos" aria-labelledby="destinos-title">
-            <h2 id="destinos-title">Destinos Populares</h2>
+        <section id="destinos" class="reveal" aria-labelledby="destinos-title">
+            <h2 id="destinos-title">Nossas Curadorias</h2>
             <div id="grid-destinos" class="container-grid">
                 </div>
         </section>
 
-        <section class="carousel-section" aria-label="Depoimentos de Clientes">
-            <div class="carousel-container" role="region" aria-live="polite">
-                <div id="carousel-track" class="carousel-track">
-                    </div>
-                <button class="prev" aria-label="Slide anterior">❮</button>
-                <button class="next" aria-label="Próximo slide">❯</button>
-            </div>
-        </section>
-
-        <section id="faq" aria-labelledby="faq-title">
+        <section id="faq" class="reveal" aria-labelledby="faq-title">
             <h2 id="faq-title">Dúvidas Frequentes</h2>
-            <div id="faq-container" class="accordion-group">
+            <div id="faq-container">
                 </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 ExploreMundo Viagens. Feito com foco em acessibilidade.</p>
+    <footer role="contentinfo">
+        <p>&copy; 2026 BioViagens - Acessibilidade em primeiro lugar.</p>
     </footer>
 
     <script src="script.js"></script>
