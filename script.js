@@ -1,73 +1,59 @@
 
-// 1. GESTÃO DE DADOS (Simulando um DB/API)
-const destinos = [
-    { nome: "Paris", desc: "A cidade luz e do romance.", img: "🗼" },
-    { nome: "Tóquio", desc: "Tradição e tecnologia de ponta.", img: "🍣" },
-    { nome: "Rio de Janeiro", desc: "Belezas naturais e energia.", img: "🏖️" }
+// --- GESTÃO DE DADOS ---
+const destinosData = [
+    { nome: "Ilhas Maldivas", desc: "Paraísos de águas cristalinas.", preco: "R$ 12.000" },
+    { nome: "Patagônia", desc: "Aventuras geladas e paisagens épicas.", preco: "R$ 8.500" },
+    { nome: "Tóquio", desc: "Onde o futuro encontra a tradição.", preco: "R$ 15.000" }
 ];
 
-const faqs = [
-    { q: "Quais documentos preciso?", a: "Para a maioria dos destinos, passaporte válido por 6 meses." },
-    { q: "Posso parcelar?", a: "Sim, em até 12x sem juros no cartão." }
+const faqData = [
+    { q: "Preciso de visto?", a: "Depende do destino. Verifique a aba de suporte." },
+    { q: "Quais as formas de pagamento?", a: "Aceitamos Pix, Cartão em 12x e Cripto." }
 ];
 
-// 2. RENDERIZAÇÃO DINÂMICA
-function renderizarConteudo() {
+// --- RENDERIZAÇÃO DINÂMICA ---
+function renderContent() {
     const grid = document.getElementById('grid-destinos');
-    grid.innerHTML = destinos.map(dest => `
+    grid.innerHTML = destinosData.map(item => `
         <article class="card">
-            <div style="font-size: 3rem">${dest.img}</div>
-            <h3>${dest.nome}</h3>
-            <p>${dest.desc}</p>
+            <h3>${item.nome}</h3>
+            <p>${item.desc}</p>
+            <strong>${item.preco}</strong>
         </article>
     `).join('');
 
     const faqContainer = document.getElementById('faq-container');
-    faqContainer.innerHTML = faqs.map((f, i) => `
+    faqContainer.innerHTML = faqData.map((item, index) => `
         <div class="accordion-item">
-            <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(${i})">
-                ${f.q}
+            <button class="accordion-header" onclick="toggleAccordion(${index})" aria-expanded="false">
+                ${item.q}
             </button>
-            <div class="accordion-content" id="faq-${i}">${f.a}</div>
+            <div class="accordion-content" style="display:none; padding: 1rem;">
+                <p>${item.a}</p>
+            </div>
         </div>
     `).join('');
 }
 
-// 3. ACESSIBILIDADE: CONTROLE DE FONTE E CONTRASTE
+// --- ACESSIBILIDADE ---
 let fontSize = 100;
-document.getElementById('font-up').addEventListener('click', () => {
-    fontSize += 10;
-    document.documentElement.style.fontSize = `${fontSize}%`;
-});
-
-document.getElementById('font-down').addEventListener('click', () => {
-    fontSize -= 10;
-    document.documentElement.style.fontSize = `${fontSize}%`;
-});
-
-document.getElementById('btn-contrast').addEventListener('click', () => {
-    document.body.classList.toggle('high-contrast');
-});
-
-// 4. COMPONENTE: ACORDEÃO
-function toggleAccordion(index) {
-    const contents = document.querySelectorAll('.accordion-content');
-    const headers = document.querySelectorAll('.accordion-header');
-    
-    const isVisible = contents[index].classList.contains('active');
-    
-    // Fecha todos
-    contents.forEach(c => c.classList.remove('active'));
-    headers.forEach(h => h.setAttribute('aria-expanded', 'false'));
-
-    // Abre o clicado
-    if (!isVisible) {
-        contents[index].classList.add('active');
-        headers[index].setAttribute('aria-expanded', 'true');
-    }
+function adjustFont(type) {
+    fontSize = type === 'increase' ? fontSize + 10 : fontSize - 10;
+    document.body.style.fontSize = fontSize + "%";
 }
 
-// 5. ANIMAÇÃO: SCROLL REVEAL (Observer API)
+function toggleContrast() {
+    document.body.classList.toggle('high-contrast');
+}
+
+// --- COMPONENTES (ACORDEÃO) ---
+function toggleAccordion(index) {
+    const contents = document.querySelectorAll('.accordion-content');
+    const display = contents[index].style.display;
+    contents[index].style.display = display === 'block' ? 'none' : 'block';
+}
+
+// --- ANIMAÇÃO SCROLL REVEAL ---
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -76,16 +62,8 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-// Inicialização
+// --- INICIALIZAÇÃO ---
 window.onload = () => {
-    renderizarConteudo();
-    document.querySelectorAll('.card').forEach(card => observer.observe(card));
+    renderContent();
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 };
-
-// 6. CARROSSEL (Lógica Simplificada)
-let currentSlide = 0;
-document.querySelector('.next').addEventListener('click', () => {
-    const track = document.getElementById('carousel-track');
-    currentSlide = (currentSlide + 1) % 3; // Supondo 3 slides
-    track.style.transform = `translateX(-${currentSlide * 100}%)`;
-});
