@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExploraMundo | Destinos Inesquecíveis</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="accessibility-bar" role="complementary" aria-label="Ferramentas de acessibilidade">
+        <button onclick="changeFontSize('increase')" aria-label="Aumentar fonte">A+</button>
+        <button onclick="changeFontSize('decrease')" aria-label="Diminuir fonte">A-</button>
+        <button onclick="toggleContrast()" aria-label="Alternar alto contraste">Alto Contraste</button>
+    </nav>
+
+    <header>
+        <nav class="main-nav" role="navigation">
+            <div class="logo">Explora<span>Mundo</span></div>
+            <ul class="nav-links">
+                <li><a href="#destinos">Destinos</a></li>
+                <li><a href="#faq">Dúvidas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <h1 id="hero-title">O mundo é grande demais para ficar em um só lugar.</h1>
+            <p>Descubra pacotes personalizados com foco em conforto e aventura.</p>
+            <a href="#destinos" class="btn-primary">Explorar Agora</a>
+        </section>
+
+        <section id="destinos" class="section-padding" aria-labelledby="destinos-title">
+            <h2 id="destinos-title" class="text-center">Destinos Populares</h2>
+            <div id="destinos-container" class="grid-container">
+                </div>
+        </section>
+
+        <section id="faq" class="section-padding bg-light">
+            <h2 class="text-center">Dúvidas Frequentes</h2>
+            <div id="faq-container" class="accordion">
+                </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2023 ExploraMundo Viagens. Feito com foco em acessibilidade.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
