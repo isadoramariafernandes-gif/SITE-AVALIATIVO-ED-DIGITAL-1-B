@@ -1,50 +1,49 @@
 
-// 1. GESTÃO DE DADOS (Não repetitivo)
-const esportes = [
-    { titulo: "Futebol", desc: "A paixão nacional e mundial." },
-    { titulo: "Basquete", desc: "Dinâmica e estratégia em quadra." },
-    { titulo: "Natação", desc: "Saúde e performance na água." }
+// 1. Menu Mobile
+const menuToggle = document.getElementById('mobile-menu');
+const navLinks = document.getElementById('nav-links');
+
+menuToggle.addEventListener('click', () => {
+    // Alerta simples conforme solicitado
+    alert("Menu lateral em desenvolvimento para mobile!");
+    // Lógica de toggle poderia entrar aqui: navLinks.classList.toggle('active');
+});
+
+// 2. Simulação de Carrossel (Troca de Background)
+const banner = document.querySelector('.slide');
+const titles = ["A Emoção do Basquete", "Velocidade Máxima", "O Rei do Futebol"];
+const imgs = [
+    "https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=1600",
+    "https://images.unsplash.com/photo-1530549387074-d56260b049c1?auto=format&fit=crop&q=80&w=1600",
+    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=1600"
 ];
 
-const grid = document.getElementById('grid-esportes');
+let index = 0;
 
-function renderCards() {
-    grid.innerHTML = esportes.map(esp => `
-        <article class="card reveal">
-            <h3>${esp.titulo}</h3>
-            <p>${esp.desc}</p>
-        </article>
-    `).join('');
+function changeBanner() {
+    index = (index + 1) % imgs.length;
+    banner.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${imgs[index]}')`;
+    banner.querySelector('h1').innerText = titles[index];
 }
 
-// 2. ACESSIBILIDADE: CONTROLE DE FONTE
-let currentFontSize = 100;
-const body = document.body;
+// Troca a cada 5 segundos
+setInterval(changeBanner, 5000);
 
-document.getElementById('btn-font-up').addEventListener('click', () => {
-    currentFontSize += 10;
-    body.style.setProperty('--base-font-size', `${currentFontSize}%`);
+// 3. Botão Ver Mais
+const loadMoreBtn = document.getElementById('load-more');
+const extraNews = document.querySelector('.extra-news');
+
+loadMoreBtn.addEventListener('click', () => {
+    extraNews.style.display = 'block';
+    loadMoreBtn.innerText = "Não há mais notícias";
+    loadMoreBtn.disabled = true;
+    loadMoreBtn.style.opacity = "0.5";
 });
 
-document.getElementById('btn-font-down').addEventListener('click', () => {
-    currentFontSize -= 10;
-    body.style.setProperty('--base-font-size', `${currentFontSize}%`);
-});
-
-// 3. MODO CONTRASTE
-document.getElementById('btn-contrast').addEventListener('click', () => {
-    body.classList.toggle('high-contrast');
-});
-
-// 4. SCROLL REVEAL (Observador de Interseção)
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
+// 4. Interação nos botões de notícias
+const newsButtons = document.querySelectorAll('.btn-news');
+newsButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        alert("Você será redirecionado para a notícia completa em breve!");
     });
 });
-
-// Inicialização
-window.onload = () => {
-    renderCards();
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-};
