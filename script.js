@@ -1,68 +1,73 @@
 
-// 1. Simulação de Notícias Dinâmicas
-const newsData = [
-    { title: "Brasil vence amistoso com gol no último minuto!", time: "Há 2 horas" },
-    { title: "Novo recorde mundial na maratona de Boston.", time: "Há 5 horas" },
-    { title: "Transferências: Astro do basquete muda de time.", time: "Há 8 horas" }
+// 1. DADOS DAS MODALIDADES
+const esportes = [
+    { 
+        titulo: "Futebol", 
+        desc: "A técnica e a emoção do esporte mais popular do planeta.",
+        img: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=500",
+        alt: "Bola de futebol no campo"
+    },
+    { 
+        titulo: "Basquete", 
+        desc: "Alta performance e estratégia em cada arremesso.",
+        img: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=500",
+        alt: "Bola de basquete entrando na cesta"
+    },
+    { 
+        titulo: "Vôlei", 
+        desc: "Trabalho em equipe e precisão absoluta na rede.",
+        img: "https://images.unsplash.com/photo-1592656670411-591e90ae8044?w=500",
+        alt: "Partida de vôlei de praia"
+    }
 ];
 
-const newsContainer = document.getElementById('news-container');
+// 2. RENDERIZAÇÃO DINÂMICA
+const grid = document.getElementById('grid-esportes');
 
-function loadNews() {
-    newsData.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'news-item reveal';
-        div.innerHTML = `
-            <h4>${item.title}</h4>
-            <small>${item.time}</small>
-        `;
-        newsContainer.appendChild(div);
-    });
+function renderCards() {
+    grid.innerHTML = esportes.map(item => `
+        <article class="card reveal">
+            <img src="${item.img}" alt="${item.alt}" class="card-img">
+            <div class="card-content">
+                <h3>${item.titulo}</h3>
+                <p>${item.desc}</p>
+            </div>
+        </article>
+    `).join('');
 }
 
-// 2. Menu Hamburguer
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
+// 3. ACESSIBILIDADE E CONTROLES
+const body = document.body;
+let fontSize = 100;
 
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+// Fonte
+document.getElementById('btn-font-up').addEventListener('click', () => {
+    fontSize += 10;
+    body.style.setProperty('--base-font-size', fontSize + '%');
 });
 
-// 3. Troca de Tema (Dark/Light)
-const themeBtn = document.getElementById('theme-toggle');
-themeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌓';
+document.getElementById('btn-font-down').addEventListener('click', () => {
+    fontSize -= 10;
+    body.style.setProperty('--base-font-size', fontSize + '%');
 });
 
-// 4. Contador de Cliques
-let count = 0;
-const countBtn = document.getElementById('count-btn');
-const counterDisplay = document.getElementById('click-counter');
-
-countBtn.addEventListener('click', () => {
-    count++;
-    counterDisplay.textContent = count;
-    countBtn.style.transform = "scale(0.9)";
-    setTimeout(() => countBtn.style.transform = "scale(1)", 100);
+// Contraste
+document.getElementById('btn-contrast').addEventListener('click', () => {
+    body.classList.toggle('high-contrast');
 });
 
-// 5. Animação de Scroll (Reveal)
-function reveal() {
-    const reveals = document.querySelectorAll('.reveal');
-    reveals.forEach(el => {
-        const windowHeight = window.innerHeight;
-        const revealTop = el.getBoundingClientRect().top;
-        const revealPoint = 150;
-
-        if (revealTop < windowHeight - revealPoint) {
-            el.classList.add('active');
+// 4. ANIMAÇÃO AO ROLAR (Intersection Observer)
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
         }
     });
-}
+}, { threshold: 0.1 });
 
-window.addEventListener('scroll', reveal);
+// Inicialização
 window.onload = () => {
-    loadNews();
-    reveal(); // Inicia os elementos visíveis
+    renderCards();
+    // Observa os cards após serem criados
+    document.querySelectorAll('.reveal').forEach(card => observer.observe(card));
 };
