@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Esporte Total</title>
+    <title>Portal Esporte Total - Landing Page</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,17 +20,26 @@
     </header>
 
     <main>
-        <section id="hero">
-            <h1>O Mundo dos Esportes</h1>
-            <p>Performance, saúde e paixão em um só lugar.</p>
+        <section id="hero" aria-labelledby="hero-title">
+            <h1 id="hero-title">O Mundo dos Esportes em um só lugar</h1>
+            <p>Descubra modalidades, treinos e performance.</p>
         </section>
 
-        <section id="modalidades">
-            <h2>Modalidades em Destaque</h2>
+        <section id="modalidades" aria-labelledby="mod-title">
+            <h2 id="mod-title">Modalidades em Destaque</h2>
             <div id="grid-esportes" class="grid-container">
                 </div>
         </section>
+
+        <section id="faq" aria-labelledby="faq-title">
+            <h2 id="faq-title">Dúvidas Frequentes</h2>
+            <div id="accordion-container"></div>
+        </section>
     </main>
+
+    <footer>
+        <p>&copy; 2024 Esporte Total - Acessibilidade em primeiro lugar.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
