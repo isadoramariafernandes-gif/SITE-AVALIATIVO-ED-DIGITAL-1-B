@@ -1,40 +1,38 @@
 
-/* 1. VARIÁVEIS E CONFIGURAÇÕES GERAIS */
+/* 1. VARIÁVEIS DE DESIGN (Fácil Edição) */
 :root {
     --primary-color: #004a99;
     --secondary-color: #ffcc00;
     --bg-color: #f4f4f4;
-    --card-bg: #ffffff;
     --text-color: #333;
-    --radius: 12px;
-    --spacing: 1.5rem;
-    --base-font-size: 100%;
+    --radius: 8px;
+    --spacing: 1rem;
+    --base-font-size: 100%; /* Para controle de escala no JS */
 }
 
-/* MODO ALTO CONTRASTE */
+/* 2. ALTO CONTRASTE (UX/Acessibilidade) */
 body.high-contrast {
     --primary-color: #ffff00;
     --bg-color: #000;
-    --card-bg: #1a1a1a;
     --text-color: #fff;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
     font-size: var(--base-font-size);
-    transition: all 0.3s ease;
 }
 
-/* 2. LAYOUT */
+/* 3. LAYOUT (Mobile-First) */
 header nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem var(--spacing);
+    padding: var(--spacing);
     background: var(--primary-color);
     color: white;
 }
@@ -43,42 +41,26 @@ header nav {
     display: grid;
     gap: var(--spacing);
     padding: var(--spacing);
-    /* Grid Responsivo: Mobile 1 coluna, Desktop várias */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Edite aqui o grid: */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-/* 3. COMPONENTE DE CARD */
-.card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    overflow: hidden; /* Garante que a imagem não saia do arredondamento */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover; /* Faz a foto preencher o espaço sem achatar */
-    display: block;
-}
-
-.card-content {
-    padding: var(--spacing);
-}
-
-/* 4. ANIMAÇÕES */
+/* 4. ANIMAÇÕES (Scroll Reveal) */
 .reveal {
     opacity: 0;
-    transform: translateY(20px);
-    transition: 0.6s all ease-out;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
 }
 
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Estilo do Card */
+.card {
+    background: white;
+    padding: var(--spacing);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
